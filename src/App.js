@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [playersDetails, updatePlayersDetails] = useState([]);
+  const [text, setText] = useState();
+
+  const addName = () => {
+    updatePlayersDetails([...playersDetails, { name: text, score: 0 }]);
+    setText("");
+  };
+
+  const udpateScore = (playerId, score) => {
+    const updatedPlayerDetails = playersDetails.map((player, index) =>
+      index === playerId ? { ...player, score: player.score + score } : player
+    );
+    updatePlayersDetails(updatedPlayerDetails);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="grid">
+      {playersDetails.map((player, index) => (
+        <div>
+          {player.name}: {player.score}
+          <button onClick={() => udpateScore(index, 1)}>Add Score</button>
+        </div>
+      ))}
+      <div>
+        <input
+          onChange={(event) => {
+            const { value } = event.target;
+            setText(value);
+          }}
+          value={text}
+        />
+        <button onClick={addName}>Add Name</button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
