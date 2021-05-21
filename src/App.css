@@ -2,10 +2,43 @@
   text-align: center;
 }
 
+h1 {
+  color: rgb(53 172 176);
+  text-decoration: underline;
+}
 .grid {
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  align-content: center;
+}
+
+.row {
+  display: flex;
+  width: 23rem;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  padding-top: 1rem;
+}
+
+input {
+  width: 15rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+button {
+  font-size: 0.9rem;
+  background-color: rgb(74 155 158);
+  color: #fff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:focus,
+button:hover {
+  background-color: rgb(53 172 176);
 }

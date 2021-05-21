@@ -6,6 +6,7 @@ const App = () => {
   const [text, setText] = useState();
 
   const addName = () => {
+    if (text === "") return;
     updatePlayersDetails([...playersDetails, { name: text, score: 0 }]);
     setText("");
   };
@@ -18,22 +19,28 @@ const App = () => {
   };
 
   return (
-    <div className="grid">
-      {playersDetails.map((player, index) => (
-        <div>
-          {player.name}: {player.score}
-          <button onClick={() => udpateScore(index, 1)}>Add Score</button>
+    <div className="App">
+      <h1>Score Board</h1>
+      <div className="grid">
+        <div className="row">
+          <input
+            onChange={(event) => {
+              const { value } = event.target;
+              setText(value);
+            }}
+            value={text}
+            maxLength="20"
+          />
+          <button onClick={addName}>Add Name</button>
         </div>
-      ))}
-      <div>
-        <input
-          onChange={(event) => {
-            const { value } = event.target;
-            setText(value);
-          }}
-          value={text}
-        />
-        <button onClick={addName}>Add Name</button>
+        {playersDetails.map((player, index) => (
+          <div className="row">
+            <span>
+              {player.name}: {player.score}
+            </span>
+            <button onClick={() => udpateScore(index, 1)}>Add Score</button>
+          </div>
+        ))}
       </div>
     </div>
   );
